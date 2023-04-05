@@ -2,9 +2,7 @@ const router = require("express").Router();
 const auth = require("../middleware/auth");
 const messageController = require("../controllers/MessageController");
 
-router.post("/create", auth, userController.createGroup);
-router.post("/delete", auth, userController.deleteGroup);
-router.post("/addMember", auth, userController.addMember);
-router.get("/searchGroup", auth, userController.searchGroup);
+router.post("/create", auth, messageController.createMessage);
+router.post("/like", auth, messageController.likeMessage);
 
 module.exports = router;

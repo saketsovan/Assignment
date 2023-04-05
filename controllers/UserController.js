@@ -9,7 +9,7 @@ dotenv.config({ path: "./config.env" });
 const jwtSecret = process.env.JWT_SECRET;
 
 exports.register = async (req, res) => {
-  const { userName, password, role } = req.body;
+  const { userName, password } = req.body;
   if (!validatePasswordFormat(password)) {
     res
       .status(401)
@@ -60,13 +60,11 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-  const token = req.cookies?.token;
-  jwt.sign({ token }, jwtSecret, { expiresIn: 1 }, (logout, err) => {
-    if (logout) {
-      res.send({ msg: "You have been Logged Out" });
-    } else {
-      console.log(err);
-      res.send({ msg: "Error" });
-    }
-  });
+  try {
+    const token = jwt.sign({ userId: req.userId }, jwtSecret, { expiresIn: 1 });
+    res.cookie("token", token).status(200).json("Logged out");
+  } catch (e) {
+    console.log(e);
+    res.status(401).json("Action failed");
+  }
 };

@@ -7,13 +7,12 @@ require("./models/Message");
 
 const app = require("./app");
 
-
-
 dotenv.config({ path: "./config.env" });
 const PORT = 8000;
 
 if (process.env.DATABASE == null) {
-  throw new Error("Database Credentials not maintained in config file");``
+  throw new Error("Database Credentials not maintained in config file");
+  ``;
 }
 
 const connectionString = process.env.DATABASE;
@@ -31,3 +30,5 @@ const connectionString = process.env.DATABASE;
 app.listen(PORT, () => {
   console.log(`Listening in port ${PORT}`);
 });
+
+module.exports = app;
