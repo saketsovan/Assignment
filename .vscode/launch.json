@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Run test on current file",
       "skipFiles": ["<node_internals>/**"],
       "args": [
         "--timeout",
